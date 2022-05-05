@@ -7,7 +7,7 @@ using HospitalClassLibrary.RoomEquipment.Services.Interfaces;
 
 namespace HospitalAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class EquipmentController : ControllerBase
     {
@@ -20,11 +20,18 @@ namespace HospitalAPI.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<RoomEquipmentDto>> GetEquipment()
+        [HttpGet("floorEquipment")]
+        public async Task<IEnumerable<FloorEquipmentDto>> GetFloorEquipment()
         {
             var equipment = await _equipmentService.GetAll();
-            return _mapper.Map<IEnumerable<RoomEquipmentDto>>(equipment);
+            return _mapper.Map<IEnumerable<FloorEquipmentDto>>(equipment);
+        }
+
+        [HttpGet("equipment")]
+        public async Task<IEnumerable<EquipmentDto>> GetEquipment()
+        {
+            var equipment = await _equipmentService.GetAll();
+            return _mapper.Map<IEnumerable<EquipmentDto>>(equipment);
         }
 
     }

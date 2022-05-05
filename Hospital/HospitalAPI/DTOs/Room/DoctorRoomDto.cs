@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace HospitalAPI.DTOs
+﻿namespace HospitalAPI.DTOs
 {
     public class DoctorRoomDto
     {

@@ -39,5 +39,6 @@ namespace HospitalClassLibrary.RoomEquipment.Services
         {
             await _equipmentRepository.DeleteAsync(e);
         }
-    }
+
+	}
 }

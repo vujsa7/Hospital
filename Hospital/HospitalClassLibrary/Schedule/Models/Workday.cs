@@ -5,12 +5,12 @@ namespace HospitalClassLibrary.Schedule.Models
 {
     public class Workday
     {
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
-        public int DoctorId { get; private set; }
+        public int DoctorId { get; set; }
 
-        public int ShiftId { get; private set; }
-        public Shift Shift { get; private set; }
+        public int ShiftId { get; set; }
+        public Shift Shift { get; set; }
 
         public ICollection<Appointment> Appointments { get; private set; }
 

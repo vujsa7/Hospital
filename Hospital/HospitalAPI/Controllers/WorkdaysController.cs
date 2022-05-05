@@ -27,7 +27,7 @@ namespace HospitalAPI.Controllers
             }
 
             [HttpPost]
-            public async Task<IActionResult> PostWorkday([FromBody] Workday workday)
+            public async Task<IActionResult> PostWorkday(Workday workday)
             {
                 if (workday is null)
                     return BadRequest();
@@ -38,7 +38,7 @@ namespace HospitalAPI.Controllers
             }
 
             [HttpPut]
-            public async Task<IActionResult> PutShift([FromBody] Workday workday)
+            public async Task<IActionResult> PutWorkday([FromBody] Workday workday)
             {
                 if (workday is null)
                     return BadRequest();

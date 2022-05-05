@@ -48,19 +48,19 @@ namespace HospitalIntegrationTests
 
             var actualFirstOldRoom = await _client.GetAsync($"/api/rooms/{mergeRenovation.FirstOldRoomId}");
             var actualFirstOldRoomAsString = await actualFirstOldRoom.Content.ReadAsStringAsync();
-            var actualFirstOldRoomAsJson = JsonConvert.DeserializeObject<RoomDto>(actualFirstOldRoomAsString);
+            var actualFirstOldRoomAsJson = JsonConvert.DeserializeObject<RoomWithEquipmentDto>(actualFirstOldRoomAsString);
 
             var actualSecondOldRoom = await _client.GetAsync($"/api/rooms/{mergeRenovation.SecondOldRoomId}");
             var actualSecondOldRoomAsString = await actualSecondOldRoom.Content.ReadAsStringAsync();
-            var actualSecondOldRoomAsJson = JsonConvert.DeserializeObject<RoomDto>(actualSecondOldRoomAsString);
+            var actualSecondOldRoomAsJson = JsonConvert.DeserializeObject<RoomWithEquipmentDto>(actualSecondOldRoomAsString);
 
             var actualNewRoom = await _client.GetAsync($"/api/rooms/12");
             var actualNewRoomAsString = await actualNewRoom.Content.ReadAsStringAsync();
-            var actualNewRoomAsJson = JsonConvert.DeserializeObject<RoomDto>(actualNewRoomAsString);
+            var actualNewRoomAsJson = JsonConvert.DeserializeObject<RoomWithEquipmentDto>(actualNewRoomAsString);
 
             var actualNewRoomEquipment = await _client.GetAsync($"/api/rooms/12/equipment");
             var actualNewRoomEquipmentAsString = await actualNewRoomEquipment.Content.ReadAsStringAsync();
-            var actualNewRoomEquipmentAsJson = JsonConvert.DeserializeObject<RoomDto>(actualNewRoomEquipmentAsString);
+            var actualNewRoomEquipmentAsJson = JsonConvert.DeserializeObject<RoomWithEquipmentDto>(actualNewRoomEquipmentAsString);
 
             actualMergeRenovationsAsJson.ShouldBeEmpty();
 
@@ -68,10 +68,6 @@ namespace HospitalIntegrationTests
             actualSecondOldRoomAsJson.ShouldBeNull();
 
             actualNewRoomAsJson.Id.ShouldBe(mergeRenovation.NewRoomInfo.Id);
-            actualNewRoomAsJson.X.ShouldBe(861);
-            actualNewRoomAsJson.Y.ShouldBe(237);
-            actualNewRoomAsJson.Height.ShouldBe(170);
-            actualNewRoomAsJson.Width.ShouldBe(532);
 
             actualNewRoomEquipmentAsJson.Equipment.First().ReservedQuantity.ShouldBe(0);
             actualNewRoomEquipmentAsJson.Equipment.First().Quantity.ShouldBe(50);

@@ -10,18 +10,24 @@ namespace HospitalAPI.DTOs.MappingProfile
         public MappingProfile()
         {
             CreateMap<EquipmentDto, Equipment>();
-            CreateMap<RoomEquipmentDto, Equipment>();
+            CreateMap<FloorEquipmentDto, Equipment>();
+            CreateMap<FloorRoomDto, Room>();
+            CreateMap<RoomWithEquipmentDto, Room>();
             CreateMap<RoomDto, Room>();
             CreateMap<EquipmentTransferDto, EquipmentTransfer>();
             CreateMap<HolidayDto, Holiday>();
 
-            CreateMap<Equipment, EquipmentDto>();
-            CreateMap<Equipment, RoomEquipmentDto>();
-            CreateMap<Room, RoomDto>()
+            CreateMap<Equipment, EquipmentDto>()
+                .ForMember(d => d.RoomName, o => o.MapFrom(s => s.Room.Name))
+                .ForMember(d => d.RoomType, o => o.MapFrom(s => s.Room.Type));
+            CreateMap<Equipment, FloorEquipmentDto>();
+            CreateMap<Room, FloorRoomDto>()
                 .ForMember(d => d.X, o => o.MapFrom(s => s.RoomDimensions.X))
                 .ForMember(d => d.Y, o => o.MapFrom(s => s.RoomDimensions.Y))
                 .ForMember(d => d.Width, o => o.MapFrom(s => s.RoomDimensions.Width))
                 .ForMember(d => d.Height, o => o.MapFrom(s => s.RoomDimensions.Height));
+            CreateMap<Room, RoomWithEquipmentDto>();
+            CreateMap<Room, RoomDto>();
             CreateMap<RoomDimensions, RoomDto>();
             CreateMap<EquipmentTransfer, EquipmentTransferDto>();
             CreateMap<Holiday, HolidayDto>();
